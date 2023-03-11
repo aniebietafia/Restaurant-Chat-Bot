@@ -1,7 +1,13 @@
 const Product = require("../models/product.models");
 
+const createProduct = async (req, res, next) => {
+  const product = await Product.create(req.body);
+  res.status(201).json({ product });
+};
+
 const productsList = async (req, res, next) => {
-  res.status(200).json(products);
+  const products = await Product.find({});
+  res.status(200).json({ products });
 };
 
 const placeOrder = (req, res, next) => {
@@ -21,6 +27,7 @@ const cancelOrder = (req, res, next) => {
 };
 
 module.exports = {
+  createProduct,
   productsList,
   placeOrder,
   orderCheckout,
