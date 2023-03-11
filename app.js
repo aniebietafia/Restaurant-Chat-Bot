@@ -4,35 +4,37 @@ const path = require("path");
 
 // Importing npm modules
 const express = require("express");
-const mongoose = require("mongoose");
 // const socketio = require("socket.io");
 require("dotenv").config();
 
-// Creating express app
-const app = express();
-//const server = http.createServer(app);
-//const io = socketio(server);
+// Importing custom routes
+const productRoute = require("./routes/product.route");
 
+// Creating express app and servers
+const app = express();
+// const httpServer = http.createServer(app);
+// const socketServer = socketio(httpServer);
+
+// Set up static folder
 app.use(express.static(path.join(__dirname, "public")));
 
+// Order route middleware
+app.use(productRoute);
+
 // Setting up socket.io connection
+// socketServer.on("connection", (socket) => {
+//   console.log("Client has been connected");
+
+//   socket.emit("message", "Welcome to Restaurant ChatBot");
+// });
 
 const PORT = process.env.PORT || 8000;
 
-// Creating server
+app.listen(PORT, () => {
+  console.log(`Server is listening on http://localhost:${PORT}`);
+});
 
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then((result) => {
-    // server.listen(PORT, () => {
-    //   console.log(`Server started on http://localhost:${PORT}`);
-    // });
-    const server = app.listen(PORT);
-    const socketio = require("socket.io")(server);
-    socketio.on("connection", (socket) => {
-      console.log("Client connected");
-    });
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+// Creating server
+// httpServer.listen(PORT, () => {
+//   console.log(`Server is listening on http://localhost:${PORT}`);
+// });
