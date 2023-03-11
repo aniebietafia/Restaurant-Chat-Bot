@@ -10,12 +10,15 @@ require("dotenv").config();
 // Importing custom routes
 const productRoute = require("./routes/product.route");
 
+const MONGODB_CONNECTION = require("./db/connect");
+
 // Creating express app and servers
 const app = express();
 // const httpServer = http.createServer(app);
 // const socketServer = socketio(httpServer);
 
 // Set up static folder
+app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
 // Order route middleware
@@ -27,7 +30,7 @@ app.use(productRoute);
 
 //   socket.emit("message", "Welcome to Restaurant ChatBot");
 // });
-
+MONGODB_CONNECTION(process.env.MONGO_URI);
 const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, () => {
