@@ -1,18 +1,21 @@
 const mongoose = require("mongoose");
+const { config_settings } = require("../middleware/session.middleware");
 
-const MONGODB_CONNECTION = (MONGODB_URI) => {
+const mongodb_connection = (server) => {
   mongoose.set("strictQuery", false);
 
-  mongoose.connect(MONGODB_URI);
-
-  mongoose.connection.on("connected", () => {
-    console.log("Successfully connected to database");
-  });
-
-  mongoose.connection.on("error", () => {
-    console.log("Connection to database failed");
-    console.log(error);
-  });
+  mongoose
+    .connect(config_settings.LOCALDB, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      dbName: config_settings.DBNAME,
+    })
+    .then(() =>
+      server.listen(config_settings.PORT, () => {
+        console.log(`Running on http://${config_settings.PORT} and successfully connected to database`);
+      })
+    )
+    .catch((err) => console.log("connection failed", err));
 };
 
-module.exports = MONGODB_CONNECTION;
+module.exports = mongodb_connection;
