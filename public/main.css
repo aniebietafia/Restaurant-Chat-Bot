@@ -60,10 +60,12 @@ section {
   margin: 0.5rem 0;
 }
 
-.products {
+.products,
+.options {
   list-style: none;
   margin: 0;
   padding: 0;
+  margin-bottom: 10px;
 }
 
 /* .post-item {
