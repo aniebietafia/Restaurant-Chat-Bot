@@ -1,11 +1,7 @@
-// Import node core modules and npm packages
-const path = require("path");
 const express = require("express");
-
-const sessionMiddleware = require("./middleware/session.middleware");
-
-// Invoke express
+const path = require("path");
 const app = express();
+const sessionMiddleware = require("./config/sessionMiddleware");
 
 app.use(express.static(path.join(__dirname, "public")));
 
