@@ -4,21 +4,31 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ChatBot</title>
-    <link rel="stylesheet" href="./main.css" />
+    <title>Chat</title>
+    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <h1>ChatBot</h1>
-    <a href="chatbot.html">ChatBot</a>
+    <div class="container">
+      <div class="chat-container">
+        <div class="chat-form-container">
+          <form id="chat-form">
+            <input id="msg" type="text" placeholder="Enter Message" required autofocus autocomplete="off" />
+            <button class="btn">Send</button>
+          </form>
+        </div>
+        <div class="chat-header">
+          <h1>Restaurant ChatBot</h1>
+        </div>
+        <div class="chat-body"></div>
+      </div>
+    </div>
 
-    <!-- Scripts -->
-    <!-- <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.js"
-      integrity="sha512-xbQU0+iHqhVt7VIXi6vBJKPh3IQBF5B84sSHdjKiSccyX/1ZI7Vnkt2/8y8uruj63/DVmCxfUNohPNruthTEQA=="
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.2/qs.min.js"
+      integrity="sha256-TDxXjkAUay70ae/QJBEpGKkpVslXaHHayklIVglFRT4="
       crossorigin="anonymous"
-      referrerpolicy="no-referrer"
     ></script>
-    <script src="/socket.io/socket.io.js"></script> -->
-    <script src="./script.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./js/main.js"></script>
   </body>
 </html>
