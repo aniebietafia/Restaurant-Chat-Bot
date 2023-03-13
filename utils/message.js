@@ -1,5 +1,11 @@
-const displayMessage = (username, info) => {
-  return { username, info };
-};
+const moment = require("moment");
 
-module.exports = displayMessage;
+function message(username, text) {
+	return {
+		username,
+		text,
+		time: moment().format("h:mm a"),
+	};
+}
+
+module.exports = message;
