@@ -9,18 +9,18 @@ const {
   saveSessionID,
   loadMessage,
   welcomeMessage,
-  mainMenu,
+  menuList,
   menu,
   checkOutOrder,
   orderHistory,
   currentOrder,
   cancelOrder,
   saveOrder,
-} = require("./controllers/factoryFunction");
-const formatMessage = require("./utils/message");
+} = require("./controllers/sessions.controller");
+const displayMessages = require("./utils/display-messages");
 const sessionMiddleware = require("./config/sessionMiddleware");
 const { config } = require("./config/config");
-const MessageModel = require("./model/messageModel");
+const MessageSchema = require("./model/message.model");
 
 const server = http.createServer(app);
 const io = new Server(server, {
@@ -52,14 +52,14 @@ io.on("connection", async (socket) => {
   //listen for user message
   levels[sessionId] = 0;
   socket.on("private message", async (msg) => {
-    let userMessage = formatMessage("Guest", msg);
-    const number = parseInt(msg);
+    let userMessage = displayMessages("Guest", msg);
+    const number = Number(msg);
     io.to(sessionId).emit("user message", userMessage);
     let botMessage = "";
 
     switch (levels[sessionId]) {
       case 0:
-        botMessage = await mainMenu(io, sessionId);
+        botMessage = await menuList(io, sessionId);
         levels[sessionId] = 1;
         break;
       case 1:
@@ -78,7 +78,7 @@ io.on("connection", async (socket) => {
         } else if (number === 0) {
           botMessage = await cancelOrder(io, sessionId);
         } else {
-          botMessage = await formatMessage(config.botName, "Invalid Input. Enter 1 or 99 or 98 or 97 or 0");
+          botMessage = await displayMessages(config.botName, "Invalid Input. Enter 1 or 99 or 98 or 97 or 0");
           io.to(sessionId).emit("bot message", botMessage);
         }
         levels[sessionId] = 1;
@@ -93,7 +93,7 @@ io.on("connection", async (socket) => {
           number !== 6 &&
           number !== 7
         ) {
-          botMessage = await formatMessage(config.botName, "Invalid Input. Enter 1 or 2 or 3 or 4 or 5");
+          botMessage = await displayMessages(config.botName, "Invalid Input. Enter 1 or 2 or 3 or 4 or 5");
           io.to(sessionId).emit("bot message", botMessage);
           levels[sessionId] = 2;
           return;
@@ -103,7 +103,7 @@ io.on("connection", async (socket) => {
         }
         break;
     }
-    const saveMessage = await new MessageModel({
+    const saveMessage = await new MessageSchema({
       sessionID: sessionId,
       userMessage,
       botMessage,
