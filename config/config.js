@@ -1,11 +1,11 @@
 const config = {
   botName: process.env.botName,
   PORT: process.env.PORT,
-  mongoURI: process.env.mongoURI,
+  // mongoURI: process.env.mongoURI,
   sessionSecret: process.env.sessionSecret,
   local_db: process.env.local_db,
-  db_name: process.env.db_name,
-  sessionMaxAge: process.env.sessionMaxAge,
+  // db_name: process.env.db_name,
+  // sessionMaxAge: process.env.sessionMaxAge,
 };
 
 const cors = {
