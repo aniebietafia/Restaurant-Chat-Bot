@@ -112,4 +112,16 @@ io.on("connection", async (socket) => {
   });
 });
 
-connectMongo(server);
+const start = async () => {
+  try {
+    await connectMongo(config.local_db);
+    await server.listen(config.PORT, () => {
+      console.log(`Server started on http://localhost:${config.PORT}`);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+start();
+
+// connectMongo(server);
