@@ -1,10 +1,11 @@
 const mongoose = require("mongoose");
 const { config } = require("../config/config");
+require("dotenv").config();
 
 function connectMongo(server) {
   mongoose.set("strictQuery", false);
   mongoose
-    .connect(config.local_db, {
+    .connect(/*config.local_db*/ process.env.local_db, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       // dbName: config.db_name,
