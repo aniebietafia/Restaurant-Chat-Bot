@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const config = {
   botName: process.env.botName,
   PORT: process.env.PORT,

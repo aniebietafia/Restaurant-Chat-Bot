@@ -5,9 +5,9 @@ function connectMongo(server) {
   mongoose.set("strictQuery", false);
   mongoose
     .connect(config.local_db, {
-      // useNewUrlParser: true,
-      // useUnifiedTopology: true,
-      dbName: config.db_name,
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      // dbName: config.db_name,
     })
     .then(() =>
       server.listen(config.PORT, () => {
