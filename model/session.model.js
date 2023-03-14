@@ -1,6 +1,3 @@
-/* eslint-disable node/no-unsupported-features/es-syntax */
-// import mongoose from 'mongoose';
-// const
 const mongoose = require("mongoose");
 const { Schema } = require("mongoose");
 

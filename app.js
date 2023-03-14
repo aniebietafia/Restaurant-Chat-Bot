@@ -5,6 +5,8 @@ const sessionMiddleware = require("./config/sessionMiddleware");
 
 app.use(express.static(path.join(__dirname, "public")));
 
+app.set("trust proxy", 1);
+
 app.use(sessionMiddleware);
 
 module.exports = app;

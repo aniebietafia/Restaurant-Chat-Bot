@@ -41,7 +41,7 @@ io.on("connection", async (socket) => {
   // get the session
   const session = socket.request.session;
   const sessionId = session.id;
-  // console.log(sessionId);
+
   saveSessionID(sessionId);
   //connect users with the same session id
   socket.join(sessionId);
