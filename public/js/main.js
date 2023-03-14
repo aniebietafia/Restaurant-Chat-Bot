@@ -9,7 +9,7 @@ socket.on("bot message", (message) => {
 
   //check if message.text is an array
   if (Array.isArray(message.text)) {
-    let msg = message.text.map((item) => `${item.number}: To ${item.text}`).join(`<br>`);
+    let msg = message.text.map((item) => `${item.number}: ${item.text}`).join(`<br>`);
     msg = "Please select a number from the list below: <br>" + msg;
     message.text = msg;
   } else {
