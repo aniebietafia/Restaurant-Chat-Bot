@@ -115,4 +115,7 @@ io.on("connection", async (socket) => {
   });
 });
 
-mongodb_connection(server);
+mongodb_connection(process.env.MONGODB_URL);
+server.listen(config.PORT, () => {
+  console.log(`server running on http://localhost:${config.PORT}`);
+});
