@@ -3,7 +3,7 @@ const MessageSchema = require("../model/message.model");
 const displayMessages = require("../utils/display-messages");
 const { mainMenu, foodMenu } = require("../utils/mainmenu");
 const displayOptions = require("../utils/display-options");
-const { config } = require("../config/config");
+const { config } = require("../config/setup");
 
 const saveSessionID = async (sessionID) => {
   const checksessionID = await SessionDB.findOne({ sessionID });

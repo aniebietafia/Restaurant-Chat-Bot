@@ -1,7 +1,7 @@
 const session = require("express-session");
 const MemoryStore = require("memorystore")(session);
 
-const { config } = require("./config");
+const { config } = require("./setup");
 
 const sessionMiddleware = session({
   secret: config.sessionSecret,

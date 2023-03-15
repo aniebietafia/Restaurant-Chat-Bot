@@ -1,10 +1,13 @@
+// Importing node core modules
+const http = require("http");
+
+// Importing npm packages
+const { Server } = require("socket.io");
 require("dotenv").config();
 
-const http = require("http");
-const { Server } = require("socket.io");
-
+// Importing custom modules
 const app = require("./app");
-const connectMongo = require("./model/connectDB");
+const mongodb_connection = require("./db/database");
 const {
   saveSessionID,
   loadMessage,
@@ -19,7 +22,7 @@ const {
 } = require("./controllers/sessions.controller");
 const displayMessages = require("./utils/display-messages");
 const sessionMiddleware = require("./config/sessionMiddleware");
-const { config } = require("./config/config");
+const { config } = require("./config/setup");
 const MessageSchema = require("./model/message.model");
 
 const server = http.createServer(app);
@@ -112,16 +115,4 @@ io.on("connection", async (socket) => {
   });
 });
 
-// const start = async () => {
-//   try {
-//     await connectMongo(config.local_db);
-//     await server.listen(config.PORT, () => {
-//       console.log(`Server started on http://localhost:${config.PORT}`);
-//     });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-// start();
-
-connectMongo(server);
+mongodb_connection(server);
